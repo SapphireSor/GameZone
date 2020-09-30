@@ -1,6 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import Home from './screens/Home';
+import ReviewDetails from './screens/ReviewDetails'
 import { useFonts } from 'expo-font';
 import { AppLoading } from 'expo'
 
@@ -11,15 +14,19 @@ export default function App() {
     'Oswald-Bold': require('./assets/fonts/Oswald-Bold.ttf'),
   });
 
+  const Stack = createStackNavigator();
 
   if (!fontsLoaded) {
     return <AppLoading />
   } else {
     return (
-      <View>
-        <Home />
-      </View>
-    )
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={Home} options={{ title: 'Overview' }} />
+          <Stack.Screen name="ReviewDetails" component={ReviewDetails} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
   }
   
 }
