@@ -21,7 +21,15 @@ export default function App() {
   } else {
     return (
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{
+          headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontFamily:'Oswald-Bold',
+          },
+        }}>
           <Stack.Screen name="Home" component={Home} options={{ title: 'Overview' }} />
           <Stack.Screen name="ReviewDetails" component={ReviewDetails} />
         </Stack.Navigator>
