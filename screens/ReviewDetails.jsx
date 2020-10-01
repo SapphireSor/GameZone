@@ -1,15 +1,18 @@
 import React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import Card from '../shared/Card';
 import { gobalStyles } from '../styles/global'
 
 
-export default function ReviewDetails({ route, navigation }) {
+export default function ReviewDetails({ route }) {
   const { rating, content } = route.params 
   return (
     <View style={gobalStyles.container}>
-      <Text style={gobalStyles.titleText}>Review Detail Page!</Text>
-      <Text style={gobalStyles.titleText}>{content}</Text>
-      <Button title='go back' onPress={() => navigation.goBack()}/>
+      <Card>
+        <Text style={gobalStyles.titleText}>Review Detail Page!</Text>
+        <Text style={gobalStyles.titleText}>{content}</Text>
+        <Text style={gobalStyles.titleText}>{rating}</Text>
+      </Card>
     </View>
   );
 }
