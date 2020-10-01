@@ -1,11 +1,12 @@
 import React from 'react';
-import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import Home from './screens/Home';
-import ReviewDetails from './screens/ReviewDetails'
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import HomeStack from './routes/HomeStack';
+import AboutStack from './routes/AboutStack';
 import { useFonts } from 'expo-font';
 import { AppLoading } from 'expo'
+
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -14,25 +15,16 @@ export default function App() {
     'Oswald-Bold': require('./assets/fonts/Oswald-Bold.ttf'),
   });
 
-  const Stack = createStackNavigator();
 
   if (!fontsLoaded) {
     return <AppLoading />
   } else {
     return (
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{
-          headerStyle: {
-            backgroundColor: '#f4511e',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontFamily:'Oswald-Bold',
-          },
-        }}>
-          <Stack.Screen name="Home" component={Home} options={{ title: 'Overview' }} />
-          <Stack.Screen name="ReviewDetails" component={ReviewDetails} />
-        </Stack.Navigator>
+        <Drawer.Navigator initialRouteName="Home">
+          <Drawer.Screen name="Home" component={HomeStack} />
+          <Drawer.Screen name="About" component={AboutStack} />
+        </Drawer.Navigator>
       </NavigationContainer>
     );
   }
