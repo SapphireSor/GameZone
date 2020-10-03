@@ -21,6 +21,12 @@ export const globalStyles = StyleSheet.create({
     fontSize: 18,
     paddingHorizontal: 8,
     paddingVertical: 10
+  },
+  errorText: {
+    color: 'crimson',
+    textAlign: 'center',
+    paddingBottom: 10,
+    fontWeight: 'bold'
   }
 })
 
