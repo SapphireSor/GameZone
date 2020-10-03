@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Button, FlatList, Text, View, TouchableOpacity } from 'react-native';
+import { FlatList, Text, View, TouchableOpacity, Modal, StyleSheet, StatusBar } from 'react-native';
 import Card from '../shared/Card';
 import { globalStyles } from '../styles/global'
+import { Ionicons } from '@expo/vector-icons';
 
 export default function Home({ navigation }) {
   const [reviews, setReviews] = useState([
@@ -10,12 +11,29 @@ export default function Home({ navigation }) {
     { key: '3', title: 'Not so \'Final\' Fantasy', rating: 5, content: 'great story' },
     { key: '4', title: 'My Little Pony', rating: 1, content: 'too scary' },
   ])
+  const [modalOpen, setModalOpen] = useState(false)
 
   return (
     <View style={globalStyles.container}>
+      <StatusBar translucent backgroundColor="rgba(96, 96, 96, 0.5)" barStyle='dark-content'/>
+
+      <Modal visible={modalOpen} animationType='slide'>
+        <View style={StyleSheet.modalContent}>
+        <Ionicons 
+          name="md-close-circle-outline"
+          style={{...styles.modalToggle, ...styles.modalClose}}
+          size={30} 
+          onPress={() => setModalOpen(false)} />
+          <Text>Add Review</Text>
+        </View>
+      </Modal>
+      <Ionicons 
+        name="md-add-circle-outline"
+        size={30} 
+        style={styles.modalToggle}
+        onPress={() => setModalOpen(true)} />
       <FlatList 
         data={reviews} 
-
         renderItem={({ item }) => 
           <TouchableOpacity onPress={() => navigation.navigate('ReviewDetails', item)}>
             <Card>
@@ -26,3 +44,19 @@ export default function Home({ navigation }) {
   );
 }
 
+
+const styles = StyleSheet.create({
+  modalToggle: {
+    alignSelf: 'center',
+    marginBottom: 10,
+  },
+  modalClose: {
+    marginBottom: 0,
+    marginTop: 15,
+
+  },
+  modalContent: {
+    flex: 1,
+
+  }
+})
