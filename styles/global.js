@@ -23,5 +23,7 @@ export const images = {
     '3': require('../assets/rating-3.png'),
     '4': require('../assets/rating-4.png'),
     '5': require('../assets/rating-5.png'),
-  }
+  },
+  logo: require('../assets/heart_logo.png'),
+  haderBackground: require('../assets/game_bg.png')
 }

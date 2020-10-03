@@ -1,10 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Image } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
+import { images } from '../styles/global';
 
 export function HeaderTitle () {
   return (
-    <View>
+    <View style={styles.titleContainer}>
+      <Image source={images.logo} style={styles.logo}/>
       <Text style={styles.headerText}>GameZone</Text>
     </View>
   )
@@ -20,7 +22,6 @@ export function HeaderIcon ({ navigation }) {
       <Entypo 
         name="menu" 
         size={30} 
-        color="#fff" 
         style={styles.icon} 
         onPress={() => menuPressHandler()} />
     </View>
@@ -28,10 +29,19 @@ export function HeaderIcon ({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  titleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logo: {
+    width: 26,
+    height: 26,
+    marginRight: 10
+  },
   headerText: {
-    color: '#fff',
     fontFamily: 'Oswald-Bold',
-    fontSize: 20,
+    fontSize: 25,
     letterSpacing: 1,
   },
   icon: {
