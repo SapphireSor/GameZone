@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { FlatList, Text, View, TouchableOpacity, Modal, StyleSheet, StatusBar } from 'react-native';
+import { FlatList, Text, View, TouchableOpacity, Modal, StyleSheet, StatusBar, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Card from '../shared/Card';
 import { globalStyles } from '../styles/global'
 import { Ionicons } from '@expo/vector-icons';
+import ReviewForm from './ReviewForm';
 
 export default function Home({ navigation }) {
   const [reviews, setReviews] = useState([
@@ -13,19 +14,27 @@ export default function Home({ navigation }) {
   ])
   const [modalOpen, setModalOpen] = useState(false)
 
+  const addNewReview = (review) => {
+    review.key = Math.random().toString()
+    setReviews((prevReviews) => [review, ...prevReviews])
+    setModalOpen(false) 
+  }
+
   return (
     <View style={globalStyles.container}>
       <StatusBar translucent backgroundColor="rgba(96, 96, 96, 0.5)" barStyle='dark-content'/>
 
       <Modal visible={modalOpen} animationType='slide'>
-        <View style={StyleSheet.modalContent}>
-        <Ionicons 
-          name="md-close-circle-outline"
-          style={{...styles.modalToggle, ...styles.modalClose}}
-          size={30} 
-          onPress={() => setModalOpen(false)} />
-          <Text>Add Review</Text>
-        </View>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.modalContent}>
+            <Ionicons 
+              name="md-close-circle-outline"
+              style={{...styles.modalToggle, ...styles.modalClose}}
+              size={30} 
+              onPress={() => setModalOpen(false)} />
+            <ReviewForm addNewReview={addNewReview} />
+          </View>
+        </TouchableWithoutFeedback>
       </Modal>
       <Ionicons 
         name="md-add-circle-outline"
